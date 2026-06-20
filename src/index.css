@@ -1,0 +1,284 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --neon-blue: #00f0ff;
+  --neon-purple: #b300ff;
+  --neon-pink: #ff00ff;
+  --dark-bg: #0a0a0f;
+  --dark-card: #12121a;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Rajdhani', sans-serif;
+  background-color: var(--dark-bg);
+  color: #ffffff;
+  overflow-x: hidden;
+}
+
+.font-cyber {
+  font-family: 'Orbitron', sans-serif;
+}
+
+/* Neon glow effects */
+.glow-blue {
+  box-shadow: 0 0 5px var(--neon-blue),
+              0 0 10px var(--neon-blue),
+              0 0 20px var(--neon-blue),
+              0 0 40px var(--neon-blue);
+}
+
+.glow-purple {
+  box-shadow: 0 0 5px var(--neon-purple),
+              0 0 10px var(--neon-purple),
+              0 0 20px var(--neon-purple),
+              0 0 40px var(--neon-purple);
+}
+
+.text-glow-blue {
+  text-shadow: 0 0 10px var(--neon-blue),
+               0 0 20px var(--neon-blue),
+               0 0 30px var(--neon-blue);
+}
+
+.text-glow-purple {
+  text-shadow: 0 0 10px var(--neon-purple),
+               0 0 20px var(--neon-purple),
+               0 0 30px var(--neon-purple);
+}
+
+/* Gradient borders */
+.border-gradient {
+  border: 1px solid transparent;
+  background: linear-gradient(var(--dark-card), var(--dark-card)) padding-box,
+              linear-gradient(135deg, var(--neon-blue), var(--neon-purple)) border-box;
+}
+
+/* Animated background grid */
+.cyber-grid {
+  background-image:
+    linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: gridMove 20s linear infinite;
+}
+
+@keyframes gridMove {
+  0% { background-position: 0 0; }
+  100% { background-position: 50px 50px; }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--dark-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--neon-blue), var(--neon-purple));
+  border-radius: 4px;
+}
+
+/* Canvas styling */
+.three-canvas {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+/* Section animations */
+.section-reveal {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.section-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Card hover effects */
+.cyber-card {
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.cyber-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.cyber-card:hover::before {
+  left: 100%;
+}
+
+.cyber-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 40px rgba(0, 240, 255, 0.2);
+}
+
+/* Button styles */
+.cyber-button {
+  position: relative;
+  padding: 12px 30px;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border: 2px solid var(--neon-blue);
+  background: transparent;
+  color: var(--neon-blue);
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.cyber-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--neon-blue);
+  transition: left 0.3s ease;
+  z-index: -1;
+}
+
+.cyber-button:hover {
+  color: var(--dark-bg);
+}
+
+.cyber-button:hover::before {
+  left: 0;
+}
+
+/* Glitch effect */
+.glitch {
+  position: relative;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch::before {
+  animation: glitch-1 0.5s infinite linear alternate-reverse;
+  color: var(--neon-blue);
+  z-index: -1;
+}
+
+.glitch::after {
+  animation: glitch-2 0.5s infinite linear alternate-reverse;
+  color: var(--neon-purple);
+  z-index: -2;
+}
+
+@keyframes glitch-1 {
+  0% { clip-path: inset(20% 0 60% 0); transform: translate(-2px, 2px); }
+  20% { clip-path: inset(40% 0 40% 0); transform: translate(2px, -2px); }
+  40% { clip-path: inset(60% 0 20% 0); transform: translate(-2px, 2px); }
+  60% { clip-path: inset(80% 0 0% 0); transform: translate(2px, -2px); }
+  80% { clip-path: inset(0% 0 80% 0); transform: translate(-2px, 2px); }
+  100% { clip-path: inset(10% 0 70% 0); transform: translate(2px, -2px); }
+}
+
+@keyframes glitch-2 {
+  0% { clip-path: inset(60% 0 20% 0); transform: translate(2px, -2px); }
+  20% { clip-path: inset(20% 0 60% 0); transform: translate(-2px, 2px); }
+  40% { clip-path: inset(0% 0 80% 0); transform: translate(2px, -2px); }
+  60% { clip-path: inset(80% 0 0% 0); transform: translate(-2px, 2px); }
+  80% { clip-path: inset(70% 0 10% 0); transform: translate(2px, -2px); }
+  100% { clip-path: inset(40% 0 40% 0); transform: translate(-2px, 2px); }
+}
+
+/* Pulse animation */
+@keyframes pulse-neon {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.animate-pulse-neon {
+  animation: pulse-neon 2s ease-in-out infinite;
+}
+
+/* Float animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Scanline effect */
+.scanlines::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.1),
+    rgba(0, 0, 0, 0.1) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+}
+
+/* Loading bars */
+.loading-bar {
+  width: 100%;
+  height: 2px;
+  background: var(--dark-card);
+  overflow: hidden;
+}
+
+.loading-bar::after {
+  content: '';
+  display: block;
+  width: 30%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+  animation: loading 1.5s ease-in-out infinite;
+}
+
+@keyframes loading {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(400%); }
+}
